@@ -12,6 +12,16 @@ class Savininkas(Base):
     email = Column(String)
 
 
+class NTurtas(Base):
+    __tablename__ = 'nt'
+    id = Column(Integer, primary_key=True)
+    adresas = Column(String)
+    plotas = Column(Float)
+    nt_registras = Column(String)
+    savininkas_id = Column(Integer, ForeignKey('savininkas.id'), nullable=False)
+    savininkas = relationship('Savininkas', back_populates='turtai')
+
+
 Base.metadata.create_all(engine)
 
 Session = sessionmaker(bind=engine)
